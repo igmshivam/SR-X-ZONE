@@ -1,0 +1,349 @@
+:root {
+    --primary: #00d2ff;
+    --secondary: #3a7bd5;
+    --accent: #00ffaa;
+    --bg-main: linear-gradient(135deg, #0f2027, #203a43, #2c5364); 
+    --glass: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    background: var(--bg-main);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px 10px;
+    min-height: 100vh;
+    margin: 0; /* Extra margin hatane ke liye */
+}
+
+/* 1. Outer Box Ki Chaudai Fix */
+.outer-box { 
+    width: 100%; 
+    max-width: 450px; /* Thoda sa aur bada kiya hai better look ke liye */
+    text-align: center; 
+}
+
+/* Glitch Text Fix */
+.glitch-text {
+    font-size: 2.2rem;
+    background: linear-gradient(to bottom, #fff, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 15px 0;
+}
+
+/* Chips Style */
+.style-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
+.chip { 
+    background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255,255,255,0.1); 
+    color: #fff; padding: 8px 12px; border-radius: 12px; font-size: 11px; cursor: pointer; 
+}
+.chip.active { background: var(--primary); color: #000; box-shadow: 0 0 15px var(--primary); }
+
+/* Card Styling */
+.main-card, .ig-special {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 30px;
+    padding: 25px 20px; /* Side padding badhai hai */
+    margin-bottom: 30px;
+    width: 100%; /* Fix width */
+    box-sizing: border-box; /* Padding box ke andar rakhega */
+}
+
+.ig-special { 
+    border: 1.5px solid var(--primary); 
+    background: rgba(0,0,0,0.5); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Thoda depth ke liye */
+}
+
+/* 2. Input & Textarea Ki Lambai aur Chaudai Fix */
+input, textarea {
+    width: 100%; 
+    background: #000 !important; 
+    border: 1px solid var(--primary);
+    border-radius: 15px; 
+    color: #fff; 
+    padding: 15px; /* Padding badhai hai taaki likhne mein premium lage */
+    margin-top: 12px; 
+    outline: none;
+    box-sizing: border-box; 
+    font-family: inherit;
+}
+
+/* IG Output Box ko khas lamba kiya hai */
+textarea { 
+    border-style: dashed; 
+    border-color: var(--accent); 
+    color: var(--accent); 
+    font-size: 16px; 
+    min-height: 180px; /* Isse box lamba dikhega */
+    resize: vertical; /* User chahe toh lamba kar sake */
+}
+
+/* Stylish Text Preview Box */
+#output {
+    min-height: 100px; /* Normal preview box ki height */
+}
+
+/* Buttons */
+.bomb-main-btn, #copyBtn {
+    width: 100%; 
+    padding: 15px; 
+    margin-top: 15px; 
+    border: none; 
+    border-radius: 15px;
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    color: white; 
+    font-weight: bold; 
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.bomb-main-btn:active, #copyBtn:active {
+    transform: scale(0.98); /* Click karne par dabne wala effect */
+}
+
+.ig-copy-btn { 
+    background: linear-gradient(to right, #ff00cc, #3333ff); 
+    margin-top: 15px; 
+    padding: 15px; 
+    border-radius: 15px; 
+    color: white; 
+    border: none; 
+    width: 100%; 
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Modal Fix */
+.modal { 
+    display: none; 
+    position: fixed; 
+    top:0; left:0; 
+    width:100%; height:100%; 
+    background:rgba(0,0,0,0.9); 
+    align-items:center; 
+    justify-content:center; 
+    z-index:999; 
+}
+.modal-content { 
+    background:#111; 
+    padding:30px; 
+    border-radius:25px; 
+    border: 1px solid var(--primary); 
+    text-align: center;
+}
+.platform-special {
+    border: 1.5px solid #00ffaa !important;
+    background: rgba(0, 255, 170, 0.03) !important;
+    box-shadow: 0 0 20px rgba(0, 255, 170, 0.1);
+}
+
+/* Label style for professional touch */
+.input-group label {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.platform-btn {
+    background: linear-gradient(135deg, #25D366, #0088cc) !important;
+    font-size: 14px !important;
+}
+
+.platform-gen-btn {
+    background: linear-gradient(135deg, #00ffaa, #00d2ff) !important;
+    color: #000 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+#toast-container {
+    display: none; /* JS se flex hoga */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent !important; /* Peeche ka pura black parda gayab */
+    backdrop-filter: blur(4px); /* Halka sa glass effect piche ke content pe */
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.toast-box {
+    background: rgba(26, 26, 26, 0.5); /* Dabbe ka apna halka black tint */
+    padding: 30px;
+    border-radius: 20px;
+    border: 2px solid #00f2ff; /* Aapka fixed blue dabba */
+    text-align: center;
+    max-width: 300px;
+    width: 80%;
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+    animation: achievementPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast-ok-btn {
+    margin-top: 15px;
+    background: #00f2ff;
+    color: #000;
+    border: none;
+    padding: 8px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+@keyframes achievementPop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.services-container {
+    margin: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    text-align: center;
+}
+
+.section-title {
+    color: #00f2ff;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.service-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1a1a1a;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border-left: 4px solid #00f2ff;
+    transition: 0.3s;
+}
+
+.service-card:hover {
+    transform: scale(1.02);
+    background: #252525;
+}
+
+.service-info h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+.service-info p {
+    margin: 5px 0 0;
+    color: #888;
+    font-size: 0.85rem;
+    text-align: left;
+}
+
+.service-price {
+    font-weight: bold;
+    color: #00f2ff;
+    font-size: 1.2rem;
+    background: rgba(0, 242, 255, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.order-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: linear-gradient(90deg, #ff00ff, #00f2ff);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 242, 255, 0.4);
+    transition: 0.3s;
+}
+
+.order-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 0, 255, 0.6);
+}
+/* SR-X-TOOLS SERVICES LAYOUT FIX */
+.services-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Cards ke beech gap */
+    align-items: center;
+}
+
+.section-title {
+    color: #00f2ff;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.03); /* Subtle dark glass */
+    border: 1.5px solid rgba(0, 242, 255, 0.2);
+    border-radius: 15px;
+    padding: 15px 20px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: space-between; /* Text ek taraf, Price ek taraf */
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+.service-card:hover {
+    border-color: #00f2ff;
+    background: rgba(0, 242, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+.service-info h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #fff;
+}
+
+.service-info p {
+    margin: 5px 0 0 0;
+    font-size: 12px;
+    color: #aaa;
+}
+
+.service-price {
+    background: rgba(0, 242, 255, 0.1);
+    color: #00f2ff;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    border: 1px solid rgba(0, 242, 255, 0.3);
+}
+
+.order-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 30px;
+    background: linear-gradient(45deg, #00f2ff, #0072ff);
+    color: #000;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 242, 255, 0.3);
+}
